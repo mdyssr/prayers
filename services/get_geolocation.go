@@ -29,6 +29,5 @@ func GetGeoLocation() (models.GeoData, error) {
 	if err != nil {
 		return geoData, err
 	}
-	fmt.Println(geoData.IP)
 	return geoData, nil
 }
