@@ -1,4 +1,4 @@
-package prayertimes
+package prayers
 
 import (
 	"github.com/mdyssr/prayers/models"
