@@ -79,7 +79,6 @@ func getPrayersDataFromAPI(params models.PrayerTimesParams) (prayerModel.Prayers
 			utils.FormatPrayerTiming("Sunrise", prayersResponse.Data.Timings.Sunrise),
 			utils.FormatPrayerTiming("Dhuhr", prayersResponse.Data.Timings.Dhuhr),
 			utils.FormatPrayerTiming("Asr", prayersResponse.Data.Timings.Asr),
-			utils.FormatPrayerTiming("Sunset", prayersResponse.Data.Timings.Sunset),
 			utils.FormatPrayerTiming("Maghrib", prayersResponse.Data.Timings.Maghrib),
 			utils.FormatPrayerTiming("Isha", prayersResponse.Data.Timings.Isha),
 		},

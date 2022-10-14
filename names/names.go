@@ -3,27 +3,27 @@ package names
 import "github.com/mdyssr/prayers/internal/models"
 
 var PrayerNames = map[string]models.PrayerName{
-	"Fajr": models.PrayerName{
+	"Fajr": {
 		Ar: "الفجر",
 		En: "Fajr",
 	},
-	"Sunrise": models.PrayerName{
+	"Sunrise": {
 		Ar: "الشروق",
 		En: "Sunrise",
 	},
-	"Dhuhr": models.PrayerName{
+	"Dhuhr": {
 		Ar: "الظهر",
 		En: "Dhuhr",
 	},
-	"Asr": models.PrayerName{
+	"Asr": {
 		Ar: "العصر",
 		En: "Asr",
 	},
-	"Maghrib": models.PrayerName{
+	"Maghrib": {
 		Ar: "المغرب",
 		En: "Maghrib",
 	},
-	"Isha": models.PrayerName{
+	"Isha": {
 		Ar: "العشاء",
 		En: "Isha",
 	},
