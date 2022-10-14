@@ -5,7 +5,10 @@ import (
 	"github.com/mdyssr/prayers/internal/services"
 )
 
-type PrayersData models.PrayersData
+type PrayersData struct {
+	PrayerTimings models.FormattedPrayerTimings
+	HijriDate     models.HijriDate
+}
 
 var PrayerNames = models.PrayerNames{
 	Fajr: models.PrayerName{
@@ -35,8 +38,8 @@ var PrayerNames = models.PrayerNames{
 }
 
 // GetPrayersData returns prayers data or an error
-func GetPrayersData() (models.PrayersData, error) {
-	prayersData := models.PrayersData{}
+func GetPrayersData() (PrayersData, error) {
+	prayersData := PrayersData{}
 	prayersData, err := services.GetPrayersData()
 	if err != nil {
 		return prayersData, err

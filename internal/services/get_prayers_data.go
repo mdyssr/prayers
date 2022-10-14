@@ -3,6 +3,7 @@ package services
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/mdyssr/prayers"
 	"github.com/mdyssr/prayers/internal/data"
 	"github.com/mdyssr/prayers/internal/models"
 	"github.com/mdyssr/prayers/internal/utils"
@@ -49,8 +50,8 @@ type PrayersResponse struct {
 	Data Data `json:"data"`
 }
 
-func getPrayersDataFromAPI(params models.PrayerTimesParams) (models.PrayersData, error) {
-	var prayerData models.PrayersData
+func getPrayersDataFromAPI(params models.PrayerTimesParams) (prayers.PrayersData, error) {
+	var prayerData prayers.PrayersData
 	client := http.Client{}
 	now := time.Now().Unix()
 	url := fmt.Sprintf("%s%d?latitude=%g&longitude=%g&method=%d", data.PRAYER_TIMINGS_BASE_URL, now, params.Coords.Latitude, params.Coords.Longitude, params.MethodID)
@@ -70,7 +71,7 @@ func getPrayersDataFromAPI(params models.PrayerTimesParams) (models.PrayersData,
 		return prayerData, err
 	}
 
-	prayerData = models.PrayersData{
+	prayerData = prayers.PrayersData{
 		HijriDate: prayersResponse.Data.Date.HijriDate,
 		//PrayerTimings: prayersResponse.Data.Timings,
 		PrayerTimings: models.FormattedPrayerTimings{
@@ -90,15 +91,15 @@ func GetMethods() ([]models.PrayerMethod, error) {
 	return data.PrayerMethods, nil
 }
 
-func GetPrayersData() (models.PrayersData, error) {
+func GetPrayersData() (prayers.PrayersData, error) {
 	geoData, err := GetGeoLocation()
 	if err != nil {
-		return models.PrayersData{}, GetUserIPDataError
+		return prayers.PrayersData{}, GetUserIPDataError
 	}
 
 	methods, err := GetMethods()
 	if err != nil {
-		return models.PrayersData{}, GetPrayerMethodsError
+		return prayers.PrayersData{}, GetPrayerMethodsError
 	}
 
 	nearestMethodID := utils.GetNearestMethod(&geoData.Coords, methods)
@@ -109,7 +110,7 @@ func GetPrayersData() (models.PrayersData, error) {
 
 	prayerTimes, err := getPrayersDataFromAPI(prayerTimesParams)
 	if err != nil {
-		return models.PrayersData{}, GetPrayerDataError
+		return prayers.PrayersData{}, GetPrayerDataError
 	}
 
 	return prayerTimes, nil

@@ -73,8 +73,3 @@ type HijriDate struct {
 	} `json:"month"`
 	Year string `json:"year"`
 }
-
-type PrayersData struct {
-	PrayerTimings FormattedPrayerTimings
-	HijriDate     HijriDate
-}
