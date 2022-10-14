@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"github.com/mdyssr/prayers/internal/models"
+	prayerModel "github.com/mdyssr/prayers/models"
 	"math"
 	"strconv"
 	"strings"
@@ -41,7 +42,7 @@ func PrefixWithZero(value int) string {
 	}
 }
 
-func GetStandardPrayerTime(timeString string) *models.StandardPrayerTime {
+func GetStandardPrayerTime(timeString string) *prayerModel.StandardPrayerTime {
 	timeStringParts := strings.Split(timeString, ":")
 	hours, minutes := timeStringParts[0], timeStringParts[1]
 
@@ -51,32 +52,32 @@ func GetStandardPrayerTime(timeString string) *models.StandardPrayerTime {
 	hoursNumber = hoursNumber % 12
 	standardTime := fmt.Sprintf("%s:%s", PrefixWithZero(hoursNumber), PrefixWithZero(minutesNumber))
 
-	return &models.StandardPrayerTime{
+	return &prayerModel.StandardPrayerTime{
 		Value:       standardTime,
 		Designation: *designation,
 	}
 }
 
-func GetPrayerTimeDesignation(hour int) *models.StandardPrayerTimeDesignation {
+func GetPrayerTimeDesignation(hour int) *prayerModel.StandardPrayerTimeDesignation {
 	//designation := new(models.StandardPrayerTimeDesignation)
 	if hour > 12 {
-		return &models.StandardPrayerTimeDesignation{
-			Ar: models.PrayerTimeLanguageDesignation{
+		return &prayerModel.StandardPrayerTimeDesignation{
+			Ar: prayerModel.PrayerTimeLanguageDesignation{
 				Abbreviated: "م",
 				Expanded:    "مساءًا",
 			},
-			En: models.PrayerTimeLanguageDesignation{
+			En: prayerModel.PrayerTimeLanguageDesignation{
 				Abbreviated: "pm",
 				Expanded:    "After Midday",
 			},
 		}
 	} else {
-		return &models.StandardPrayerTimeDesignation{
-			Ar: models.PrayerTimeLanguageDesignation{
+		return &prayerModel.StandardPrayerTimeDesignation{
+			Ar: prayerModel.PrayerTimeLanguageDesignation{
 				Abbreviated: "ص",
 				Expanded:    "صباحًا",
 			},
-			En: models.PrayerTimeLanguageDesignation{
+			En: prayerModel.PrayerTimeLanguageDesignation{
 				Abbreviated: "am",
 				Expanded:    "Before Midday",
 			},
@@ -84,10 +85,10 @@ func GetPrayerTimeDesignation(hour int) *models.StandardPrayerTimeDesignation {
 	}
 }
 
-func FormatPrayerTiming(name, timing string) models.FormattedPrayerTiming {
-	return models.FormattedPrayerTiming{
+func FormatPrayerTiming(name, timing string) prayerModel.FormattedPrayerTiming {
+	return prayerModel.FormattedPrayerTiming{
 		Name: name,
-		Time: models.PrayerTimeDetails{
+		Time: prayerModel.PrayerTimeDetails{
 			Military: timing,
 			Standard: *GetStandardPrayerTime(timing),
 		},
