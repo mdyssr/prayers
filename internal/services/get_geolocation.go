@@ -3,7 +3,7 @@ package services
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/mdyssr/prayers/models"
+	"github.com/mdyssr/prayers/internal/models"
 	"io"
 	"net/http"
 )

@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"github.com/mdyssr/prayers/models"
+	"github.com/mdyssr/prayers/internal/models"
 	"math"
 	"strconv"
 	"strings"

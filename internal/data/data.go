@@ -1,6 +1,8 @@
 package data
 
-import "github.com/mdyssr/prayers/models"
+import (
+	"github.com/mdyssr/prayers/internal/models"
+)
 
 const PRAYER_TIMINGS_BASE_URL = "https://api.aladhan.com/v1/timings/"
 

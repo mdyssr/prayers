@@ -1,42 +1,46 @@
 package prayers
 
 import (
-	"github.com/mdyssr/prayers/models"
-	"github.com/mdyssr/prayers/services"
-	"github.com/mdyssr/prayers/utils"
+	"github.com/mdyssr/prayers/internal/models"
+	"github.com/mdyssr/prayers/internal/services"
 )
 
-const GetUserIPDataError = Error("Error getting user IP data")
-const GetPrayerMethodsError = Error("Error getting prayer methods")
-const GetPrayerDataError = Error("Error getting prayer data")
+type PrayersData models.PrayersData
 
-type Error string
-
-func (e Error) Error() string {
-	return string(e)
+var PrayerNames = models.PrayerNames{
+	Fajr: models.PrayerName{
+		Ar: "الفجر",
+		En: "Fajr",
+	},
+	Sunrise: models.PrayerName{
+		Ar: "الشروق",
+		En: "Sunrise",
+	},
+	Dhuhr: models.PrayerName{
+		Ar: "الظهر",
+		En: "Dhuhr",
+	},
+	Asr: models.PrayerName{
+		Ar: "العصر",
+		En: "Asr",
+	},
+	Maghrib: models.PrayerName{
+		Ar: "المغرب",
+		En: "Maghrib",
+	},
+	Isha: models.PrayerName{
+		Ar: "العشاء",
+		En: "Isha",
+	},
 }
 
+// GetPrayersData returns prayers data or an error
 func GetPrayersData() (models.PrayersData, error) {
-	geoData, err := services.GetGeoLocation()
+	prayersData := models.PrayersData{}
+	prayersData, err := services.GetPrayersData()
 	if err != nil {
-		return models.PrayersData{}, GetUserIPDataError
+		return prayersData, err
 	}
 
-	methods, err := services.GetMethods()
-	if err != nil {
-		return models.PrayersData{}, GetPrayerMethodsError
-	}
-
-	nearestMethodID := utils.GetNearestMethod(&geoData.Coords, methods)
-	prayerTimesParams := models.PrayerTimesParams{
-		Coords:   geoData.Coords,
-		MethodID: nearestMethodID,
-	}
-
-	prayerTimes, err := services.GetPrayersData(prayerTimesParams)
-	if err != nil {
-		return models.PrayersData{}, GetPrayerDataError
-	}
-
-	return prayerTimes, nil
+	return prayersData, nil
 }

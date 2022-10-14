@@ -1,23 +1,5 @@
 package models
 
-type PrayersResponse struct {
-	Data Data `json:"data"`
-}
-
-type Data struct {
-	Date    Date          `json:"date"`
-	Timings PrayerTimings `json:"timings"`
-}
-
-type Date struct {
-	HijriDate HijriDate `json:"hijri"`
-}
-
-type Coords struct {
-	Latitude  float64 `json:"latitude"`
-	Longitude float64 `json:"longitude"`
-}
-
 type GeoData struct {
 	IP string `json:"ip"`
 	Coords
@@ -28,14 +10,28 @@ type PrayerMethod struct {
 	Coords
 }
 
-type PrayerTimings struct {
-	Fajr    string `json:"Fajr"`
-	Sunrise string `json:"Sunrise"`
-	Dhuhr   string `json:"Dhuhr"`
-	Asr     string `json:"Asr"`
-	Sunset  string `json:"Sunset"`
-	Maghrib string `json:"Maghrib"`
-	Isha    string `json:"Isha"`
+type Coords struct {
+	Latitude  float64 `json:"latitude"`
+	Longitude float64 `json:"longitude"`
+}
+
+type PrayerTimesParams struct {
+	Coords   Coords
+	MethodID int
+}
+
+type PrayerName struct {
+	Ar string
+	En string
+}
+
+type PrayerNames struct {
+	Fajr    PrayerName
+	Sunrise PrayerName
+	Dhuhr   PrayerName
+	Asr     PrayerName
+	Maghrib PrayerName
+	Isha    PrayerName
 }
 
 type StandardPrayerTimeDesignation struct {
@@ -81,9 +77,4 @@ type HijriDate struct {
 type PrayersData struct {
 	PrayerTimings FormattedPrayerTimings
 	HijriDate     HijriDate
-}
-
-type PrayerTimesParams struct {
-	Coords   Coords
-	MethodID int
 }
