@@ -12,6 +12,5 @@ func GetPrayersData() (models.PrayersData, error) {
 	if err != nil {
 		return prayersData, err
 	}
-
 	return prayersData, nil
 }
