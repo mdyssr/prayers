@@ -5,12 +5,7 @@ import (
 	"github.com/mdyssr/prayers/models"
 )
 
-// GetPrayersData returns prayers data or an error
+// GetPrayersData returns prayers data and an error
 func GetPrayersData() (models.PrayersData, error) {
-	prayersData := models.PrayersData{}
-	prayersData, err := services.GetPrayersData()
-	if err != nil {
-		return prayersData, err
-	}
-	return prayersData, nil
+	return services.GetPrayersData()
 }
