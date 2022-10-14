@@ -7,6 +7,7 @@ import (
 	"github.com/mdyssr/prayers/internal/data"
 	"github.com/mdyssr/prayers/internal/models"
 	"github.com/mdyssr/prayers/internal/utils"
+	prayerModel "github.com/mdyssr/prayers/models"
 	"io"
 	"net/http"
 	"time"
@@ -28,7 +29,7 @@ type PrayerMethod struct {
 }
 
 type Date struct {
-	HijriDate models.HijriDate `json:"hijri"`
+	HijriDate prayerModel.HijriDate `json:"hijri"`
 }
 
 type PrayerTimings struct {
@@ -74,7 +75,7 @@ func getPrayersDataFromAPI(params models.PrayerTimesParams) (prayers.Data, error
 	prayerData = prayers.Data{
 		HijriDate: prayersResponse.Data.Date.HijriDate,
 		//PrayerTimings: prayersResponse.Data.Timings,
-		PrayerTimings: models.FormattedPrayerTimings{
+		PrayerTimings: prayerModel.FormattedPrayerTimings{
 			utils.FormatPrayerTiming("Fajr", prayersResponse.Data.Timings.Fajr),
 			utils.FormatPrayerTiming("Sunrise", prayersResponse.Data.Timings.Sunrise),
 			utils.FormatPrayerTiming("Dhuhr", prayersResponse.Data.Timings.Dhuhr),
