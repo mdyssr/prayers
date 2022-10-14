@@ -5,4 +5,3 @@ in your Go application
 
 All what you need is to call a simple function and expect data or an error
 in case something wrong happens
-
