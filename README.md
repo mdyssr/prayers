@@ -5,3 +5,11 @@ in your Go application
 
 All what you need is to call a simple function and expect data or an error
 in case something wrong happens
+
+## Install:
+
+```sh
+go get -u https://github.com/mdyssr/prayers
+```
+
+**Developed by Muhammad Yasser @ the 2022**
